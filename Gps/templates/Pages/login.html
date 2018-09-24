@@ -1,0 +1,49 @@
+<html>
+<head>
+        {% load static %}
+        <link rel="stylesheet" href="{% static '/css/materialize.css' %}" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="{% static '/js/materialize.min.js' %}"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.js"></script>
+    <style>
+        .container{
+            height: 70%;
+            margin:50px 10%;
+            background-color: #d5e1df;
+            max-width: 500px;
+            margin:auto;
+            
+        }
+        input{
+           margin: auto;
+           width: 80% !important;
+           margin: 0 10% !important;;
+           color:#ff7043;
+
+
+        }
+        @media screen and (max-width: 600px) {
+            .container {
+                margin: 5px;
+            }
+
+            
+        }
+    </style>
+</head>
+<body style="background-color: #f0efe9;margin:20px 0px">
+    <div class="container card horizontal" style="display: block !important">
+            <h3 style="color:#ff7043;text-align: center;width: 100%;padding-top: 50px"  >𝒦𝒶𝓎ı𝓉 𝒪𝓁!</h3>
+            <form method="POST" action="/login/">
+                               
+                        <input  placeholder="İsminiz.." name="name" type="text" class="validate">
+                        <input  placeholder="Mail Adresiniz.." name="email" type="email" class="validate">           
+                        <input id="password" placeholder="Şifreniz.." name="pass" type="password" class="validate">         
+                        <input id="password" placeholder="Şifre Tekrarı.." name="pass1" type="password" class="validate">                
+                        <input class="btn" style="margin-top: 50px !important" type="submit" value="𝒦𝒶𝓎ı𝓉!">
+                        {% csrf_token %}
+                       </form>
+        </div>
+</body>
+
+</html>
