@@ -5999,23 +5999,28 @@ label {
 }
 
 ::-webkit-input-placeholder {
-    color: #d1d1d1
+    color: #FFF;
+    
 }
 
 ::-moz-placeholder {
-    color: #d1d1d1
+    color: #FFF;
+ 
 }
 
 :-ms-input-placeholder {
-    color: #d1d1d1
+    color: #FFF;
+    
 }
 
 ::-ms-input-placeholder {
-    color: #d1d1d1
+    color: #FFF;
+    
 }
 
 ::placeholder {
-    color: #d1d1d1
+    color: #FFF;
+    
 }
 
 input:not([type]),

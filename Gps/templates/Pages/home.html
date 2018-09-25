@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{% static '/css/materialize.css' %}" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="{% static '/js/materialize.min.js' %}"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <style>
         .nav1 {
             background-color: #f0efe9;
@@ -44,8 +44,8 @@
      <!-- top mini navbar-->
     <div class="nav2">
 
-        <div class='btn' onclick="$( '#field1' ).toggle();"><i class="large material-icons">dehaze</i></div>
-        <div id="field1" class="collection" style="border: 0px;text-align:center;display: none;margin-top: 5px ">
+        <div class='btn' onclick="$( `[var='f1']` ).toggle();"><i class="large material-icons">dehaze</i></div>
+        <div var="f1" class="collection" style="border: 0px;text-align:center;display: none;margin-top: 5px ">
 
             <a href="#!" class="collection-item" style="display: inline;">MEMURLAR</a>
             <a href="#!" class="collection-item" style="display: inline;">İÇERİKLER</a>
