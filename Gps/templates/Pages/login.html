@@ -27,13 +27,7 @@
 
 
         }
-        @media screen and (max-width: 600px) {
-            .container {
-                margin: 5px;
-            }
-
-            
-        }
+       
     </style>
 </head>
 
@@ -50,14 +44,14 @@
             <input placeholder="Mail Adresiniz.." name="email" type="email" class="validate">
             <input placeholder="Şifreniz.." name="pass" type="password" class="validate">
             <input placeholder="Şifre Tekrarı.." name="pass1" type="password" class="validate">
-            <input hidden name="type" type="text" value="k">
+            <input hidden name="type" type="text" value="kayıt">
             <input class="btn" style="margin-top: 50px !important" type="submit" value="𝒦𝒶𝓎ı𝓉!">
             {% csrf_token %}
         </form>
         <form var="f1" id="g" onSubmit="return login(this);">
             <input placeholder="Mail Adresiniz.." name="email" type="email" class="validate">
             <input placeholder="Şifreniz.." name="pass" type="password" class="validate">
-            <input hidden name="type" type="text" value="g">
+            <input hidden name="type" type="text" value="giris">
             <input class="btn" style="margin-top: 50px !important" type="submit" value="𝒢𝒾𝓇𝒾ş!">
             {% csrf_token %}
         </form>
@@ -71,7 +65,14 @@
             });
 
         }
+        function clear(t){
+        $(t).children().each(function(){
 
+            if($(this).attr("type")=="password")
+            $(this).val("");
+        });
+
+      }
         function login(t) {
             var v = true;
 
@@ -94,18 +95,24 @@
 
             });
             if (v) {
-                t = "#" + t.id;
+                
                 $.post("/login/", $(t).serialize(), (data) => {
                     tst(data);
-
-                    if (data == "Kayıt Oluşturuldu!")
-                        $(`[var='f1']`).toggle();
+                   
+                    if (data == "Kayıt Oluşturuldu! ")
+                       { $(`[var='f1']`).toggle(); 
+                        clear(t);
+                       
+                       }
+                    else if(data == "Giriş Yapılıyor! ")   
+                        window.location.href ="/home/";
                 });
             }
 
             return false;
 
         }
+   
     </script>
 
 </body>
