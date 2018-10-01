@@ -142,7 +142,11 @@
                 if(data=="Bir Hata Oluştu! ")
                 tst(data);
                 else
-                $( "#content" ).append( data );
+                {  
+                    $(`[p]`).removeClass( "active" );
+                     $(`[p='${$(t).attr("p")}']`).addClass( "active" );
+                    $( "#content" ).append( data );
+               }
             });
 
         }
