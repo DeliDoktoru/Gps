@@ -9,11 +9,12 @@
     <script src="{% static '/js/materialize.min.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <style>
+         .toast.b{
+	background-color:#ffb74d;
+	border-radius: 24px;
+}	
         .nav1 {
-            background-color: #f0efe9;
-            width: 200px;
-            float: left;
-            position: relative;
+          
         }
 
         li {
@@ -25,14 +26,17 @@
 
 
         }
-        .aa{
+
+        .aa {
             display: inline !important;
         }
+
         @media screen and (max-width: 400px) {
-            .aa{
-            display: block !important;
+            .aa {
+                display: block !important;
             }
         }
+
         @media screen and (max-width: 600px) {
             .nav1 {
                 display: none;
@@ -40,60 +44,108 @@
 
             .nav2 {
                 display: block;
-                width: 100%;
+                
             }
         }
-       
     </style>
 </head>
 
-<body style="background-color: #f0efe9;margin:20">
-    
-     <!-- top mini navbar-->
+<body style="background-color: #f0efe9;margin:20;color:#ff7043">
+    {% csrf_token %}
+    <!-- top mini navbar-->
     <div class="nav2">
 
         <div class='btn' onclick="$( `[var='f1']` ).toggle();"><i class="large material-icons">dehaze</i></div>
 
-        <!-- session bar-->
+        <!-- session button-->
         <div class='btn' onclick="$( `[var='f2']` ).toggle();" style="float:right;"><i class="large material-icons">person</i></div>
 
-        <div var="f1" class="collection" style="border: 0px;text-align:center;display: none;margin-top: 5px ">
+        <div var="f1" class="collection" style="border: 0px;text-align:center;display: none;margin-top: 20px ">
 
-            <a href="#!" class="collection-item aa" >MEMURLAR</a>
-            <a href="#!" class="collection-item aa" >İÇERİKLER</a>
-            <a href="#!" class="collection-item aa" >DURUM</a>
+            <a href="#!" p="p1" class="collection-item aa active" onclick="tab(this)">Profil</a>
+            <a href="#!" p="p2" class="collection-item aa" onclick="tab(this)">İÇERİKLER</a>
+            <a href="#!" p="p3" class="collection-item aa" onclick="tab(this)">DURUM</a>
         </div>
 
-        <div var="f2" class="card" style="z-index: 100;right:75;top:0;position: absolute ;width: 150px;height: 50px;background-color:#BDC2BF">
-            asdadaasdadad
+        <!-- session content-->
+        <div var="f2" class="card" style="color:#FFF;right:75;top:5;position: absolute ;width: 150px;height: 50px;background-color:#BDC2BF;padding: 5px;text-align: center;">
+            {{name}}
+            <div style="cursor: pointer;border-radius: 14px !important;color:#e3f2fd " onclick="quit();">Çıkış Yap!
+            </div>
         </div>
 
 
     </div>
-    
+
+    <img class="nav1" src="/static/img/wawe.png" style="position: absolute;width: 100%;height: 60px;left: 0"/>
+
+     <!-- session content-->
+    <div  class="card nav1" style="margin-left:auto; margin-right:0;color:#FFF;width: 150px;height: 50px;background-color:#BDC2BF;padding: 5px;text-align: center;">
+            {{name}}
+            <div style="cursor: pointer;border-radius: 14px !important;color:#e3f2fd " onclick="quit();">-- Çıkış Yap --
+            </div>
+        </div>
 
 
-    <div class="card horizontal" style="height: 80%;position: relative;">
-         <!-- left navbar-->
-        <div class="nav1">
+
+
+    <div class="card horizontal" style="height: 80%;margin-top: 20px">
+            
+        
+        <!-- left navbar-->
+        <div class="nav1" style="background-color: #f0efe9; width: 150px; float: left; position: relative;">
             <div class="collection ">
-                <a href="#!" class="collection-item ">MEMURLAR</a>
-                <a href="#!" class="collection-item ">İÇERİKLER</a>
-                <a href="#!" class="collection-item ">DURUM</a>
+                <a href="#!" p="p1" class="collection-item active" onclick="tab(this)">Profil</a>
+                <a href="#!" p="p2" class="collection-item " onclick="tab(this)">İÇERİKLER</a>
+                <a href="#!" p="p3" class="collection-item " onclick="tab(this)">DURUM</a>
 
             </div>
 
+            
+       
         </div>
 
         <!-- Content-->
-        <div style="background-color: #d5e1df;height: 100%;width: 100%;">
+        <div id="content" style="background-color: #d5e1df;height: 100%;width: 100%;padding: 5px">
 
         </div>
 
     </div>
 
     <script>
-        
+        function tst(str) {
+
+            M.toast({
+                html: str,
+                classes: 'b'
+            });
+
+        }
+
+        function quit() {
+            $.post("/quit/", {
+                "csrfmiddlewaretoken": $(`[name='csrfmiddlewaretoken']`).eq(0).val()
+            }, (data) => {
+                tst(data);
+
+                if (data == "Çıkış Yapıldı! ")
+                   window.location.href = "/login/";
+            });
+        }
+        function tab(t){
+            
+            $.post("/tab/", {
+                "csrfmiddlewaretoken": $(`[name='csrfmiddlewaretoken']`).eq(0).val(),
+                "p":$(t).attr("p")
+
+            }, (data) => {
+                if(data=="Bir Hata Oluştu! ")
+                tst(data);
+                else
+                $( "#content" ).append( data );
+            });
+
+        }
     </script>
 </body>
 

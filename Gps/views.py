@@ -7,7 +7,12 @@ from .validator import FormRegister,FormLogin
 from django.shortcuts import redirect
 # Create your views here.
 def home(request):
-    return render(request, 'Pages/home.html',{'a':request.session['mail']})
+    try:
+        tmp=request.session['id']
+        return render(request, 'Pages/home.html',{'name':request.session['name']})
+    except:
+        return redirect('/login')
+
 def login(request):  
     if request.method == 'POST':
         
@@ -32,7 +37,23 @@ def login(request):
                     return HttpResponse("Giriş Yapılıyor! ") 
     elif request.method == 'GET':    
         return render(request, 'Pages/login.html')
- 
+
+ #ajax
+def sessionKill(request):
+    if request.method == 'POST':
+        message="Çıkış Yapıldı! "
+        try:
+            request.session.clear()
+        except:
+            message="Bir Hata Oluştu! "
+        return HttpResponse(message)
+    return HttpResponse("message")
+def tab(request):
+    if request.POST.get('p')=="p1":
+        return render(request,'Pages/p1.html')
+    else:
+        return HttpResponse("Bir Hata Oluştu! ")
+
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerilazer

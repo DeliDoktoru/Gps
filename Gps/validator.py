@@ -17,6 +17,7 @@ def FormRegister(a):
         m+=validateEmail(a.get("email"))
         m+=checkUniqEmail(a.get("email"))
         m+=equalPassCheck(a.get("pass"),a.get("pass1"))
+        m+checkUniqToken(a.get("token"))
     else:
         return "Eksik Bilgi! "
     return m    
@@ -45,4 +46,8 @@ def checkUniqEmail(a):
         return "Bu Mail Adresi Zaten Kullanılıyor! "
     return ""
 
+def checkUniqToken(a):
+    if Employer.objects.filter(token=a):
+        return "Bu Token Adresi Zaten Kullanılıyor! "
+    return ""
     

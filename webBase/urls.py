@@ -26,6 +26,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', views.home),
     path('login/',views.login),
+    path('quit/',views.sessionKill),
+    path('tab/',views.tab)
 
 ]
 urlpatterns += router.urls
