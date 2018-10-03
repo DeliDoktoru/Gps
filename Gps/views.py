@@ -50,7 +50,7 @@ def sessionKill(request):
     return HttpResponse("message")
 def tab(request):
     if request.POST.get('p')=="p1":
-        return render(request,'Pages/p1.html')
+        return render(request,'Pages/p1.html',{"a":request.session['token']})
     else:
         return HttpResponse("Bir Hata Oluştu! ")
 

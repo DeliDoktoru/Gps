@@ -65,14 +65,16 @@
             });
 
         }
-        function clear(t){
-        $(t).children().each(function(){
 
-            if($(this).attr("type")=="password")
-            $(this).val("");
-        });
+        function clear(t) {
+            $(t).children().each(function () {
 
-      }
+                if ($(this).attr("type") == "password")
+                    $(this).val("");
+            });
+
+        }
+
         function login(t) {
             var v = true;
 
@@ -95,24 +97,22 @@
 
             });
             if (v) {
-                
+
                 $.post("/login/", $(t).serialize(), (data) => {
                     tst(data);
-                   
-                    if (data == "Kayıt Oluşturuldu! ")
-                       { $(`[var='f1']`).toggle(); 
+
+                    if (data == "Kayıt Oluşturuldu! ") {
+                        $(`[var='f1']`).toggle();
                         clear(t);
-                       
-                       }
-                    else if(data == "Giriş Yapılıyor! ")   
-                        window.location.href ="/home/";
+
+                    } else if (data == "Giriş Yapılıyor! ")
+                        window.location.href = "/home/";
                 });
             }
 
             return false;
 
         }
-   
     </script>
 
 </body>

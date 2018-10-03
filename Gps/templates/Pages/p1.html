@@ -1,1 +1,15 @@
-<div>hello there </div>
+{% load qr_code %}
+<div class="row" style="text-align: center;">
+    <div class="col l8 s12 m8" style="height: 200px;background-color: #000">
+
+        <div class="col l6 s6 m4" style="height: 200px;background-color: blue"></div>
+        <div class="col l6 s6 m8" style="height: 200px;background-color: aquamarine"></div>
+
+    </div>
+    <div class="col l4 s12 m4" style="height: 200px;background-color: #FFF">
+        
+            {% qr_from_text a size="s" %}
+        
+    </div>
+    
+</div>
